@@ -1,0 +1,59 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "minecraft:elytra",
+      "materials": {
+        "default": "elytra",
+        "enchanted": "elytra_glint"
+      },
+      "textures": {
+        "netherite_elytra": "textures/models/armor/netherite_elytra",
+		"netherite_chestplate": "textures/models/armor/netherite_1",
+        "diamond_elytra": "textures/models/armor/diamond_elytra",
+        "diamond_chestplate": "textures/models/armor/diamond_1",		
+        "gold_elytra": "textures/models/armor/gold_elytra",
+        "gold_chestplate": "textures/models/armor/gold_1",
+        "iron_elytra": "textures/models/armor/iron_elytra",
+		"iron_chestplate": "textures/models/armor/iron_1",
+        "default": "textures/models/armor/elytra",
+        "enchanted": "textures/misc/enchanted_item_glint"
+      },
+      "geometry": {
+        "default": "geometry.elytra",
+		"elytra_chestplate": "geometry.player.armor.chestplate"
+      },
+      "animations": {
+        "default_controller": "controller.animation.elytra.default",
+        "default": "animation.elytra.default",
+        "gliding": "animation.elytra.gliding",
+        "sneaking": "animation.elytra.sneaking",
+        "sleeping": "animation.elytra.sleeping",
+        "swimming": "animation.elytra.swimming"
+      },
+      "scripts": {
+        "parent_setup": "variable.chest_layer_visible = 0.0;",
+		"pre_animation": [
+		"variable.netherite_elytra = (q.is_item_name_any('slot.armor.head', 0, 'minecraft:netherite_helmet') || q.is_item_name_any('slot.armor.chest', 0, 'minecraft:netherite_chestplate') || q.is_item_name_any('slot.armor.legs', 0, 'minecraft:netherite_leggings') || q.is_item_name_any('slot.armor.feet', 0, 'minecraft:netherite_boots'));",
+		"variable.diamond_elytra = (q.is_item_name_any('slot.armor.head', 0, 'minecraft:diamond_helmet') || q.is_item_name_any('slot.armor.chest', 0, 'minecraft:diamond_chestplate') || q.is_item_name_any('slot.armor.legs', 0, 'minecraft:diamond_leggings') || q.is_item_name_any('slot.armor.feet', 0, 'minecraft:diamond_boots'));",
+		"variable.gold_elytra = (q.is_item_name_any('slot.armor.head', 0, 'minecraft:golden_helmet') || q.is_item_name_any('slot.armor.chest', 0, 'minecraft:golden_chestplate') || q.is_item_name_any('slot.armor.legs', 0, 'minecraft:golden_leggings') || q.is_item_name_any('slot.armor.feet', 0, 'minecraft:golden_boots'));",
+		"variable.iron_elytra = (q.is_item_name_any('slot.armor.head', 0, 'minecraft:iron_helmet') || q.is_item_name_any('slot.armor.chest', 0, 'minecraft:iron_chestplate') || q.is_item_name_any('slot.armor.legs', 0, 'minecraft:iron_leggings') || q.is_item_name_any('slot.armor.feet', 0, 'minecraft:iron_boots'));"
+		],
+		"animate": [
+          "default_controller"
+        ]
+      },
+      "render_controllers": [ 	
+	  {"controller.render.netherite_elytra" : "variable.netherite_elytra"},
+	  {"controller.render.netherite_chestplate" : "variable.netherite_elytra"},
+	  {"controller.render.diamond_elytra" : "variable.diamond_elytra && !variable.netherite_elytra"},
+	  {"controller.render.diamond_chestplate" : "variable.diamond_elytra && !variable.netherite_elytra"},
+	  {"controller.render.gold_elytra" : "variable.gold_elytra && !variable.netherite_elytra && !variable.diamond_elytra"},
+	  {"controller.render.gold_chestplate" : "variable.gold_elytra && !variable.netherite_elytra && !variable.diamond_elytra"},
+	  {"controller.render.iron_elytra" : "variable.iron_elytra && !variable.netherite_elytra && !variable.diamond_elytra && !variable.gold_elytra"},
+	  {"controller.render.iron_chestplate" : "variable.iron_elytra && !variable.netherite_elytra && !variable.diamond_elytra && !variable.gold_elytra"},
+	  {"controller.render.armor" : "q.is_alive && !variable.netherite_elytra && !variable.diamond_elytra && !variable.gold_elytra && !variable.iron_elytra"}
+ ]
+    }
+  }
+}
